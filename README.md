@@ -52,7 +52,7 @@ go test -v -cover -covermode=atomic ./...
 
 #### Running the application help
 ```bash
-.csv_extractor -h
+./csv_extractor -h
 
   -input_path string
          (default "./testdata")
@@ -62,7 +62,7 @@ go test -v -cover -covermode=atomic ./...
 
 #### Running the application (example)
 ```bash
-go run csv_extractor -input_path=./testdata -output_path=./output
+go run ./csv_extractor -input_path=./testdata -output_path=./output
 ```
 
 #### Execution summary example 

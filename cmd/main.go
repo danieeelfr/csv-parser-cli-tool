@@ -69,7 +69,7 @@ func start() {
 	fmt.Println()
 	allEmployees := make([]*domain.Employee, 0)
 	for i, fn := range fileNames {
-		allEmployees = process(i, fn, allEmployees)
+		allEmployees = append(allEmployees, process(i, fn)...)
 	}
 
 	printer.PrintInfo("Executing the dedupe process...")
@@ -125,7 +125,7 @@ func startMenu() *wmenu.Menu {
 	return menu
 }
 
-func process(i int, fn string, allEmployees []*domain.Employee) []*domain.Employee {
+func process(i int, fn string) []*domain.Employee {
 	printer.PrintInfo(fmt.Sprintf("File (%v) %s - processing...", i+1, fn))
 
 	data, err := csvParser.ToCSV(inputPath, outputPath, fn)
@@ -134,9 +134,8 @@ func process(i int, fn string, allEmployees []*domain.Employee) []*domain.Employ
 	}
 
 	fileEmployees := employee.FetchFromStringCSV(data)
-	allEmployees = append(allEmployees, fileEmployees...)
 
-	return allEmployees
+	return fileEmployees
 }
 
 func startControllers() {
